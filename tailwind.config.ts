@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,11 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				chat: {
+					'user': 'hsl(var(--chat-user))',
+					'assistant': 'hsl(var(--chat-assistant))',
+					'typing': 'hsl(var(--chat-typing))'
 				}
 			},
 			borderRadius: {
@@ -84,11 +90,62 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'fade-in': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateY(10px)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateY(0)'
+					}
+				},
+				'fade-out': {
+					'0%': {
+						opacity: '1'
+					},
+					'100%': {
+						opacity: '0'
+					}
+				},
+				'pulse-light': {
+					'0%, 100%': {
+						opacity: '1'
+					},
+					'50%': {
+						opacity: '0.5'
+					}
+				},
+				'bounce-light': {
+					'0%, 100%': {
+						transform: 'translateY(0)'
+					},
+					'50%': {
+						transform: 'translateY(-5px)'
+					}
+				},
+				'typing': {
+					'0%': { width: '0%' },
+					'20%': { width: '20%' },
+					'40%': { width: '40%' },
+					'60%': { width: '60%' },
+					'80%': { width: '80%' },
+					'100%': { width: '100%' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'fade-in': 'fade-in 0.5s ease-out forwards',
+				'fade-out': 'fade-out 0.5s ease-out forwards',
+				'pulse-light': 'pulse-light 1.5s ease-in-out infinite',
+				'bounce-light': 'bounce-light 1.5s ease-in-out infinite',
+				'typing': 'typing 1.5s ease-out infinite'
+			},
+			fontFamily: {
+				'sans': ['Inter', 'SF Pro Display', 'system-ui', 'sans-serif'],
+				'mono': ['SF Mono', 'JetBrains Mono', 'monospace'],
 			}
 		}
 	},

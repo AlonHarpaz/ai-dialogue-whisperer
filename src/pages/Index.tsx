@@ -1,12 +1,23 @@
-// Update this page (the content is just a fallback if you fail to update the page)
 
-const Index = () => {
+import React from 'react';
+import ChatInterface from '@/components/ChatInterface';
+
+const Index: React.FC = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen flex flex-col bg-background">
+      <header className="border-b border-border">
+        <div className="max-w-5xl mx-auto w-full px-4 sm:px-6 md:px-8 py-4 flex items-center justify-between">
+          <h1 className="text-xl font-medium">AI Whisperer</h1>
+          <div className="flex space-x-1">
+            <span className="h-2 w-2 rounded-full bg-primary animate-pulse"></span>
+            <span className="text-sm text-muted-foreground">Online</span>
+          </div>
+        </div>
+      </header>
+      
+      <main className="flex-1 overflow-hidden">
+        <ChatInterface />
+      </main>
     </div>
   );
 };

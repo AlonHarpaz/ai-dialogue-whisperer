@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -13,7 +14,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 222.2 47.4% 11.2%;
+    --primary: 210 100% 50%;
     --primary-foreground: 210 40% 98%;
 
     --secondary: 210 40% 96.1%;
@@ -32,23 +33,20 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --chat-user: 206 100% 97%;
+    --chat-assistant: 0 0% 100%;
+    --chat-typing: 210 40% 98%;
   }
 
   .dark {
@@ -61,7 +59,7 @@
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 210 40% 98%;
+    --primary: 210 100% 60%;
     --primary-foreground: 222.2 47.4% 11.2%;
 
     --secondary: 217.2 32.6% 17.5%;
@@ -79,14 +77,10 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --chat-user: 215 25% 27%;
+    --chat-assistant: 222.2 47.4% 11.2%;
+    --chat-typing: 215 25% 20%;
   }
 }
 
@@ -97,5 +91,74 @@
 
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer components {
+  .chat-container {
+    @apply max-w-5xl mx-auto w-full px-4 sm:px-6 md:px-8 py-6 h-screen flex flex-col;
+  }
+
+  .chat-messages {
+    @apply flex-1 overflow-y-auto pb-4 space-y-6 scroll-smooth scrollbar-thin scrollbar-thumb-muted scrollbar-track-transparent;
+  }
+
+  .message-container {
+    @apply flex flex-col space-y-2 animate-fade-in opacity-0;
+    animation-fill-mode: forwards;
+    animation-delay: calc(var(--index) * 0.05s);
+  }
+
+  .message-user {
+    @apply bg-chat-user rounded-2xl p-4 max-w-[85%] self-end;
+  }
+
+  .message-assistant {
+    @apply bg-chat-assistant rounded-2xl p-4 max-w-[85%] self-start border border-border shadow-sm;
+  }
+
+  .input-container {
+    @apply relative mt-auto pt-4 border-t border-border;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 bg-background rounded-xl border border-border focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all duration-200 shadow-sm;
+  }
+
+  .send-button {
+    @apply absolute right-3 top-[calc(1rem+3px)] p-2 rounded-lg bg-primary text-primary-foreground transition-all duration-200 hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
+  }
+
+  .typing-indicator {
+    @apply flex space-x-1 items-center p-2 bg-chat-typing rounded-xl max-w-[60px] animate-pulse-light;
+  }
+
+  .typing-dot {
+    @apply w-2 h-2 rounded-full bg-muted-foreground/70 animate-bounce-light;
+    animation-delay: calc(var(--dot-index) * 0.1s);
+  }
+
+  /* Scrollbar Styling */
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted));
+    border-radius: 3px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground));
+  }
+
+  /* Glass morphism */
+  .glass-effect {
+    @apply backdrop-blur-xl bg-white/80 dark:bg-black/50 border border-white/20 dark:border-white/10;
   }
 }
