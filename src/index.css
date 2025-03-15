@@ -101,7 +101,7 @@
   }
 
   .chat-messages {
-    @apply flex-1 overflow-y-auto pb-4 space-y-6 scroll-smooth scrollbar-thin scrollbar-thumb-muted scrollbar-track-transparent;
+    @apply flex-1 overflow-y-auto pb-4 space-y-6 scroll-smooth;
   }
 
   .message-container {

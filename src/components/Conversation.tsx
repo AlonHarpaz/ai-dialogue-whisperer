@@ -2,6 +2,7 @@
 import React, { useRef, useEffect } from 'react';
 import ChatMessage from './ChatMessage';
 import TypingIndicator from './TypingIndicator';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 export type Message = {
   content: string;
@@ -26,30 +27,32 @@ const Conversation: React.FC<ConversationProps> = ({ messages, isTyping }) => {
   }, [messages, isTyping]);
 
   return (
-    <div className="chat-messages px-2 sm:px-4">
-      {messages.length === 0 ? (
-        <div className="h-full flex items-center justify-center">
-          <div className="text-center max-w-md animate-fade-in">
-            <h2 className="text-2xl font-medium mb-2">Welcome to the AI Assistant</h2>
-            <p className="text-muted-foreground">
-              Ask anything and get a detailed, helpful response.
-            </p>
+    <ScrollArea className="flex-1 px-2 sm:px-4">
+      <div className="pb-4 space-y-6">
+        {messages.length === 0 ? (
+          <div className="h-full flex items-center justify-center min-h-[50vh]">
+            <div className="text-center max-w-md animate-fade-in">
+              <h2 className="text-2xl font-medium mb-2">Welcome to the AI Assistant</h2>
+              <p className="text-muted-foreground">
+                Ask anything and get a detailed, helpful response.
+              </p>
+            </div>
           </div>
-        </div>
-      ) : (
-        messages.map((message, index) => (
-          <ChatMessage
-            key={message.id}
-            content={message.content}
-            type={message.type}
-            index={index}
-          />
-        ))
-      )}
-      
-      {isTyping && <TypingIndicator />}
-      <div ref={messagesEndRef} />
-    </div>
+        ) : (
+          messages.map((message, index) => (
+            <ChatMessage
+              key={message.id}
+              content={message.content}
+              type={message.type}
+              index={index}
+            />
+          ))
+        )}
+        
+        {isTyping && <TypingIndicator />}
+        <div ref={messagesEndRef} />
+      </div>
+    </ScrollArea>
   );
 };
 
