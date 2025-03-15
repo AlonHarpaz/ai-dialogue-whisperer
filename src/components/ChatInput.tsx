@@ -44,6 +44,8 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, isLoading }) => {
     }
   }, [language, t]);
 
+  const isRtl = language === 'he';
+
   return (
     <form onSubmit={handleSubmit} className="input-container">
       <div className="relative">
@@ -53,14 +55,16 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, isLoading }) => {
           onChange={(e) => setMessage(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder={t('sendMessage')}
-          className="input-field resize-none min-h-[50px] max-h-[120px] pr-12"
+          className={`input-field resize-none min-h-[50px] max-h-[120px] ${isRtl ? 'pl-12 pr-4' : 'pr-12 pl-4'}`}
           disabled={isLoading}
           rows={1}
-          dir={language === 'he' ? 'rtl' : 'ltr'}
+          dir={isRtl ? 'rtl' : 'ltr'}
         />
         <button 
           type="submit" 
-          className="send-button"
+          className={`absolute top-[calc(1rem+3px)] p-2 rounded-lg bg-primary text-primary-foreground transition-all duration-200 hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
+            isRtl ? 'left-3 right-auto' : 'right-3 left-auto'
+          }`}
           disabled={!message.trim() || isLoading}
           aria-label="Send message"
         >
