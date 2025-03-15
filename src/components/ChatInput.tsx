@@ -1,6 +1,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { ArrowUp } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface ChatInputProps {
   onSendMessage: (message: string) => void;
@@ -10,6 +11,7 @@ interface ChatInputProps {
 const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, isLoading }) => {
   const [message, setMessage] = useState('');
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const { t, language } = useLanguage();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,6 +36,14 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, isLoading }) => {
     }
   }, [message]);
 
+  useEffect(() => {
+    // Update online status text
+    const onlineStatus = document.getElementById('online-status');
+    if (onlineStatus) {
+      onlineStatus.textContent = t('online');
+    }
+  }, [language, t]);
+
   return (
     <form onSubmit={handleSubmit} className="input-container">
       <div className="relative">
@@ -42,10 +52,11 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, isLoading }) => {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="Send a message..."
+          placeholder={t('sendMessage')}
           className="input-field resize-none min-h-[50px] max-h-[120px] pr-12"
           disabled={isLoading}
           rows={1}
+          dir={language === 'he' ? 'rtl' : 'ltr'}
         />
         <button 
           type="submit" 

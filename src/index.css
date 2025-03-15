@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -82,6 +81,19 @@
     --chat-assistant: 222.2 47.4% 11.2%;
     --chat-typing: 215 25% 20%;
   }
+
+  /* RTL Support */
+  [dir="rtl"] .message-user {
+    @apply self-start;
+  }
+
+  [dir="rtl"] .message-assistant {
+    @apply self-end;
+  }
+
+  [dir="rtl"] .send-button {
+    @apply left-3 right-auto;
+  }
 }
 
 @layer base {
@@ -160,5 +172,13 @@
   /* Glass morphism */
   .glass-effect {
     @apply backdrop-blur-xl bg-white/80 dark:bg-black/50 border border-white/20 dark:border-white/10;
+  }
+
+  .rtl {
+    direction: rtl;
+  }
+
+  .ltr {
+    direction: ltr;
   }
 }
