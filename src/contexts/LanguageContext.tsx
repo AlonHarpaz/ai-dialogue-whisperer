@@ -15,14 +15,12 @@ const translations = {
     askAnything: "Ask anything and get a detailed, helpful response.",
     sendMessage: "Send a message...",
     online: "Online",
-    askForCode: "Try asking for code examples!",
   },
   he: {
     welcome: "ברוכים הבאים לעוזר הבינה המלאכותית",
     askAnything: "שאל כל שאלה וקבל תשובה מפורטת ומועילה.",
     sendMessage: "שלח הודעה...",
     online: "מחובר",
-    askForCode: "נסה לבקש דוגמאות קוד!",
   }
 };
 

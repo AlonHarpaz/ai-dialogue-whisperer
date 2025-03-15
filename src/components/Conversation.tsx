@@ -35,11 +35,8 @@ const Conversation: React.FC<ConversationProps> = ({ messages, isTyping }) => {
           <div className="h-full flex items-center justify-center min-h-[50vh]">
             <div className="text-center max-w-md animate-fade-in">
               <h2 className="text-2xl font-medium mb-2">{t('welcome')}</h2>
-              <p className="text-muted-foreground mb-2">
+              <p className="text-muted-foreground">
                 {t('askAnything')}
-              </p>
-              <p className="text-primary text-sm">
-                {t('askForCode')}
               </p>
             </div>
           </div>
